@@ -6,11 +6,10 @@ import io
 
 # Streamlit UI
 st.set_page_config(
-    page_title="GraphGenius - Data Visualization & Exploration Dashboard",
-    initial_sidebar_state="expanded",
-    layout="centered"
+    page_title="GraphGenius",
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
-
 st.title("GraphGenius - Data Visualization & Exploration Dashboard")
 st.write("GraphGenius is a data visualization & Exploration dashboard. Users can upload CSV or Excel files to visualize, explore, and manipulate their data easily!")
 
