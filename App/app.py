@@ -6,7 +6,7 @@ import io
 
 # Streamlit UI
 st.set_page_config(
-    page_title="GraphGenius",
+    page_title="GraphGenius - Data Visualization & Exploration Dashboard",
     initial_sidebar_state="expanded",
     layout="centered"
 )
