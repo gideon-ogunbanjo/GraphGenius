@@ -1,4 +1,3 @@
-# Libraries
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -30,8 +29,12 @@ def main():
         
         st.write("Uploaded Data:", data)
         
+        # Function to describe the Dataset
+        st.subheader("Dataset Description")
+        description = data.describe()
+        st.write(description)
+        
         # Data Visualization
-        # Matplotlib Bar Chart
         st.sidebar.subheader("Choose Columns for Visualization")
         x_column = st.sidebar.selectbox("X Axis", data.columns)
         y_column = st.sidebar.selectbox("Y Axis", data.columns)
@@ -42,11 +45,10 @@ def main():
             fig = px.line(data, x=x_column, y=y_column, title='Line Plot')
             st.plotly_chart(fig)
 
-        
 # Main Function Execution
 if __name__ == "__main__":
     main()
 
 # Reference Links    
-link='Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
-st.markdown(link,unsafe_allow_html=True)
+link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
+st.markdown(link, unsafe_allow_html=True)
