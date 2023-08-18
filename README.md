@@ -1,4 +1,4 @@
-# GraphGenius - Data Visualization Dashboard
+# GraphGenius - Data Visualization & Exploration Dashboard
 ### Overview
 
 GraphGenius is a simple data visualization dashboard built using Streamlit, designed to allow users to upload CSV or Excel files and perform various data visualization and exploration tasks.
