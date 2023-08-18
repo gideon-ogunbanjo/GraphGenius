@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
+import io
 
 # Streamlit UI
 st.set_page_config(
@@ -29,11 +30,29 @@ def main():
         
         st.write("Uploaded Data:", data)
         
-        # Describe the Dataset
-        if st.button("Show Extended Dataset Description"):
+        # Dataset Description
+        st.subheader("Dataset Description")
+        description = data.describe()
+        st.write(description)
+        
+        # Additional Information Button
+        if st.button("Show Extended Dataset Information"):
             st.subheader("Extended Dataset Information")
-            description = data.describe()
-            st.write(description)
+            st.info("Dataset Information:")
+            st.info(data.info())
+        
+        # Conversion and Download
+        st.subheader("Convert and Download")
+        conversion_format = st.radio("Convert to:", ["CSV", "Excel"])
+        if st.button("Convert and Download"):
+            if conversion_format == "CSV":
+                converted_file = io.BytesIO()
+                data.to_csv(converted_file, index=False)
+                st.download_button("Download Converted File", converted_file.getvalue(), file_name="converted_data.csv")
+            elif conversion_format == "Excel":
+                converted_file = io.BytesIO()
+                data.to_excel(converted_file, index=False, engine='openpyxl')
+                st.download_button("Download Converted File", converted_file.getvalue(), file_name="converted_data.xlsx")
         
         # Data Visualization
         st.sidebar.subheader("Choose Columns for Visualization")
