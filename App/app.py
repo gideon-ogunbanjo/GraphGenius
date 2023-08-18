@@ -30,6 +30,12 @@ def main():
         
         st.write("Uploaded Data:", data)
         
+        # Data Visualization
+        # Matplotlib Bar Chart
+        st.subheader("Matplotlib Bar Chart")
+        plt.bar(data['x'], data['y'])
+        st.pyplot()
+
         
 # Main Function Execution
 if __name__ == "__main__":
