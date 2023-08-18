@@ -29,17 +29,13 @@ def main():
             return
         
         st.write("Uploaded Data:", data)
-        
-        # Dataset Description
-        st.subheader("Dataset Description")
-        description = data.describe()
-        st.write(description)
+    
         
         # Additional Information Button
         if st.button("Show Extended Dataset Information"):
-            st.subheader("Extended Dataset Information")
-            st.info("Dataset Information:")
-            st.info(data.info())
+            st.subheader("Dataset Description")
+            description = data.describe()
+            st.write(description)
         
         # Data Manipulation
         st.subheader("Data Manipulation")
