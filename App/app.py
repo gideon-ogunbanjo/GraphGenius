@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered",
 )
 st.title("GraphGenius - Data Visualization & Exploration Dashboard")
-st.write("GraphGenius is a data visualization & Exploration dashboard. Users can upload CSV or Excel files to visualize, explore, and manipulate their data easily!")
+st.write("GraphGenius is a data visualization & Exploration dashboard. Upload your CSV or Excel files and visualize, explore, and manipulate your data easily!")
 
 # File Uploader Widget
 uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
