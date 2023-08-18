@@ -32,9 +32,15 @@ def main():
         
         # Data Visualization
         # Matplotlib Bar Chart
-        st.subheader("Matplotlib Bar Chart")
-        plt.bar(data['x'], data['y'])
-        st.pyplot()
+        st.sidebar.subheader("Choose Columns for Visualization")
+        x_column = st.sidebar.selectbox("X Axis", data.columns)
+        y_column = st.sidebar.selectbox("Y Axis", data.columns)
+
+        st.subheader("Plotly Line Plot")
+
+        if st.sidebar.button("Generate Plotly Line Plot"):
+            fig = px.line(data, x=x_column, y=y_column, title='Line Plot')
+            st.plotly_chart(fig)
 
         
 # Main Function Execution
