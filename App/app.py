@@ -77,7 +77,7 @@ if uploaded_file is not None:
 
     if st.sidebar.button("Generate Plotly Line Plot"):
         fig = px.line(data, x=x_column, y=y_column, title='Line Plot')
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
 # Reference Links    
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
