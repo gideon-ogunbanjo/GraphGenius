@@ -1,3 +1,4 @@
+# Libraries
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -10,7 +11,7 @@ st.set_page_config(
     layout="centered"
 )
 
-
+# Main Function
 def main():
     st.title("GraphGenius - Data Visualization Dashboard")
     st.write("GraphGenius is a data visualization dashboard. Users can upload CSV or Excel files to visualize and explore their data easily!")
@@ -30,9 +31,10 @@ def main():
         st.write("Uploaded Data:", data)
         
         
-
+# Main Function Execution
 if __name__ == "__main__":
     main()
-    
+
+# Reference Links    
 link='Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
 st.markdown(link,unsafe_allow_html=True)
