@@ -29,10 +29,11 @@ def main():
         
         st.write("Uploaded Data:", data)
         
-        # Function to describe the Dataset
-        st.subheader("Dataset Description")
-        description = data.describe()
-        st.write(description)
+        # Describe the Dataset
+        if st.button("Show Extended Dataset Description"):
+            st.subheader("Extended Dataset Information")
+            description = data.describe()
+            st.write(description)
         
         # Data Visualization
         st.sidebar.subheader("Choose Columns for Visualization")
