@@ -14,7 +14,7 @@ st.set_page_config(
 # Main Function
 def main():
     st.title("GraphGenius - Data Visualization Dashboard")
-    st.write("GraphGenius is a data visualization dashboard. Users can upload CSV or Excel files to visualize and explore their data easily!")
+    st.write("GraphGenius is a data visualization dashboard. Users can upload CSV or Excel files to visualize, explore, and manipulate their data easily!")
     
     # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
@@ -40,6 +40,30 @@ def main():
             st.subheader("Extended Dataset Information")
             st.info("Dataset Information:")
             st.info(data.info())
+        
+        # Data Manipulation
+        st.subheader("Data Manipulation")
+        st.write("Perform simple data transformation operations:")
+        
+        operation = st.selectbox("Select Operation", ["Select Columns", "Filter Rows", "Sort Data"])
+        
+        if operation == "Select Columns":
+            selected_columns = st.multiselect("Select Columns", data.columns)
+            if selected_columns:
+                st.write(data[selected_columns])
+        
+        elif operation == "Filter Rows":
+            column = st.selectbox("Select Column for Filtering", data.columns)
+            value = st.text_input(f"Enter Value for {column}:", "")
+            if value:
+                filtered_data = data[data[column] == value]
+                st.write(filtered_data)
+        
+        elif operation == "Sort Data":
+            sort_column = st.selectbox("Select Column for Sorting", data.columns)
+            ascending = st.checkbox("Ascending Order")
+            sorted_data = data.sort_values(by=sort_column, ascending=ascending)
+            st.write(sorted_data)
         
         # Conversion and Download
         st.subheader("Convert and Download")
