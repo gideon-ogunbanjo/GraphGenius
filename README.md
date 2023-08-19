@@ -1,7 +1,7 @@
 # GraphGia - Data Visualization & Exploration Dashboard
 ### Overview
 
-GraphGia is a simple data visualization dashboard built using Streamlit, designed to allow users to upload CSV or Excel files and perform various data visualization and exploration tasks.
+GraphGia is a data visualization & Exploration tool, designed to allow users upload their CSV or Excel files and visualize, explore, clean and manipulate the uploaded data easily!
 
 ### Features
 - File Upload: GraphGia sllows users upload CSV or Excel files to visualize and explore data.
