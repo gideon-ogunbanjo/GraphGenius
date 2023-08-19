@@ -11,8 +11,8 @@ st.set_page_config(
     page_title="GraphGia",
     layout="centered",
 )
-st.title("GraphGia - Data Visualization & Exploration Dashboard")
-st.write("GraphGia is a data visualization & Exploration dashboard. Upload your CSV or Excel files and visualize, explore, clean and manipulate your data easily!")
+st.title("GraphGia - Data Visualization & Exploration Tool")
+st.write("GraphGia is a data visualization & Exploration tool. Upload your CSV or Excel files and visualize, explore, clean and manipulate your data easily!")
 
 # File Uploader Widget
 uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
