@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import io
 import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 # Streamlit UI
@@ -73,8 +74,17 @@ if uploaded_file is not None:
     # Data Cleaning Button
     if st.button("Clean Data"):
         cleaned_data = data.dropna().drop_duplicates()
-        st.write("Data cleaned successfully!")
+        
+        # Label Encoding
+        label_encoder = LabelEncoder()
+        categorical_columns = cleaned_data.select_dtypes(include=['object']).columns
+        for col in categorical_columns:
+            if col in cleaned_data.columns:
+                cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
+        
+        st.write("Data cleaned and encoded successfully!")
         data = cleaned_data
+
 
     # Conversion and Download
     st.subheader("Convert and Download")
