@@ -1,14 +1,14 @@
-# GraphGenius - Data Visualization & Exploration Dashboard
+# GraphGia - Data Visualization & Exploration Dashboard
 ### Overview
 
-GraphGenius is a simple data visualization dashboard built using Streamlit, designed to allow users to upload CSV or Excel files and perform various data visualization and exploration tasks.
+GraphGia is a simple data visualization dashboard built using Streamlit, designed to allow users to upload CSV or Excel files and perform various data visualization and exploration tasks.
 
 ### Features
-- File Upload: GraphGenius sllows users upload CSV or Excel files to visualize and explore data.
-- Data Visualization: GraphGenius generates a Plotly line plot based on chosen columns.
-- Dataset Description: GraphGenius displays extended statistical information about the dataset. It shows extended dataset information including data types and non-null counts.
-- File Conversion: GraphGenius allows users convert uploaded data between CSV and Excel formats.
-- File Download: GraphGenius allows users download the converted file in the desired format.
+- File Upload: GraphGia sllows users upload CSV or Excel files to visualize and explore data.
+- Data Visualization: GraphGia generates a Plotly line plot based on chosen columns.
+- Dataset Description: GraphGia displays extended statistical information about the dataset. It shows extended dataset information including data types and non-null counts.
+- File Conversion: GraphGia allows users convert uploaded data between CSV and Excel formats.
+- File Download: GraphGia allows users download the converted file in the desired format.
 
 ### How to Use
 1. Upload Data: Use the file uploader to select and upload a CSV or Excel file.
