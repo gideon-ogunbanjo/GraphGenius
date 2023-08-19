@@ -8,6 +8,7 @@ GraphGia is a simple data visualization dashboard built using Streamlit, designe
 - Data Visualization: GraphGia generates a Plotly line plot based on chosen columns.
 - Dataset Description: GraphGia displays extended statistical information about the dataset. It shows extended dataset information including data types and non-null counts.
 - File Conversion: GraphGia allows users convert uploaded data between CSV and Excel formats.
+- Data Cleaning: GraphGia allows users clean their uploaded data by removing duplicate and null values from the dataset
 - File Download: GraphGia allows users download the converted file in the desired format.
 
 ### How to Use
