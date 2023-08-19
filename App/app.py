@@ -26,6 +26,14 @@ if uploaded_file is not None:
         st.error("Unsupported file format. Please upload a CSV or Excel file.")
     
     st.write("Uploaded Data:", data)
+    
+    # Seaborn Heatmap
+    # Show Heatmap Button
+    if st.button("Show Dataset Heatmap"):
+        st.subheader("Seaborn Heatmap")
+        plt.figure(figsize=(10, 6))
+        sns.heatmap(data.corr(), annot=True, cmap='coolwarm')
+        st.pyplot()
 
     # Additional Information Button
     if st.button("Show Extended Dataset Information"):
@@ -86,14 +94,6 @@ if uploaded_file is not None:
     if st.sidebar.button("Generate Plotly Line Plot"):
         fig = px.line(data, x=x_column, y=y_column, title='Line Plot')
         st.plotly_chart(fig, use_container_width=True)
-        
-    # Seaborn Heatmap
-    # Show Heatmap Button
-    if st.button("Show Heatmap"):
-        st.subheader("Seaborn Heatmap")
-        plt.figure(figsize=(10, 6))
-        sns.heatmap(data.corr(), annot=True, cmap='coolwarm')
-        st.pyplot()
 
 # Reference Links    
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
