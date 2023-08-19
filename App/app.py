@@ -26,14 +26,19 @@ if uploaded_file is not None:
         st.error("Unsupported file format. Please upload a CSV or Excel file.")
     
     st.write("Uploaded Data:", data)
-    
-    # Seaborn Heatmap
-    # Show Heatmap Button
-    if st.button("Show Dataset Heatmap"):
-        st.subheader("Seaborn Heatmap")
-        plt.figure(figsize=(10, 6))
-        sns.heatmap(data.corr(), annot=True, cmap='coolwarm')
-        st.pyplot()
+    # # Seaborn Heatmap
+    # # Show Heatmap Button
+    # if st.button("Show Dataset Heatmap"):
+    #     st.subheader("Seaborn Heatmap")
+    #     plt.figure(figsize=(10, 6))
+        
+    #     # Select numeric columns for heatmap
+    #     numeric_columns = data.select_dtypes(include=['float64', 'int64']).columns
+    #     selected_columns = st.multiselect("Select Columns for Heatmap", numeric_columns)
+        
+    #     if selected_columns:
+    #         sns.heatmap(data[selected_columns].corr(), annot=True, cmap='coolwarm')
+    #         st.pyplot()
 
     # Additional Information Button
     if st.button("Show Extended Dataset Information"):
