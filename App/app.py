@@ -3,7 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import io
+import seaborn as sns
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 # Streamlit UI
 st.set_page_config(
     page_title="GraphGia",
@@ -84,6 +86,14 @@ if uploaded_file is not None:
     if st.sidebar.button("Generate Plotly Line Plot"):
         fig = px.line(data, x=x_column, y=y_column, title='Line Plot')
         st.plotly_chart(fig, use_container_width=True)
+        
+    # Seaborn Heatmap
+    # Show Heatmap Button
+    if st.button("Show Heatmap"):
+        st.subheader("Seaborn Heatmap")
+        plt.figure(figsize=(10, 6))
+        sns.heatmap(data.corr(), annot=True, cmap='coolwarm')
+        st.pyplot()
 
 # Reference Links    
 link = 'Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)'
