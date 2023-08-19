@@ -1,4 +1,4 @@
-# GraphGia - Data Visualization & Exploration Dashboard
+# GraphGia - Data Visualization & Exploration Tool
 ### Overview
 
 GraphGia is a data visualization & Exploration tool, designed to allow users upload their CSV or Excel files and visualize, explore, clean and manipulate the uploaded data easily!
