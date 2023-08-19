@@ -10,7 +10,7 @@ st.set_page_config(
     layout="centered",
 )
 st.title("GraphGia - Data Visualization & Exploration Dashboard")
-st.write("GraphGia is a data visualization & Exploration dashboard. Upload your CSV or Excel files and visualize, explore, and manipulate your data easily!")
+st.write("GraphGia is a data visualization & Exploration dashboard. Upload your CSV or Excel files and visualize, explore, clean and manipulate your data easily!")
 
 # File Uploader Widget
 uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
@@ -54,7 +54,8 @@ if uploaded_file is not None:
         ascending = st.checkbox("Ascending Order")
         sorted_data = data.sort_values(by=sort_column, ascending=ascending)
         st.write(sorted_data)
-        # Data Cleaning Button
+        
+    # Data Cleaning Button
     if st.button("Clean Data"):
         cleaned_data = data.dropna().drop_duplicates()
         st.write("Data cleaned successfully!")
