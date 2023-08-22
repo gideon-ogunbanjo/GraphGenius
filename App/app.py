@@ -8,8 +8,8 @@ from sklearn.preprocessing import LabelEncoder
 
 
 def main():
-    st.sidebar.title("Choose an Option")
-    st.sidebar.write("Here in this tool, you have both GraphGia - for Data Visualization & Exploration and an interactive Exploratory Data Analysis Dashboard.")
+    st.sidebar.title("GraphGia - Data Visualization & Exploration tool")
+    st.sidebar.write("GraphGia is a tool used for Data Visualization & Exploration, and Exploratory Data Analysis.")
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
         ["GraphGia","EDA Dashboard"]
@@ -23,8 +23,8 @@ def main():
 def eda_dashboard():
 
     def main():
-        st.title("Nebatt - Exploratory Data Analysis Dashboard")
-        st.write("Upload your dataset and explore it interactively!")
+        st.title("Exploratory Data Analysis Dashboard")
+        st.write("Upload your dataset and visualize it interactively!")
 
         uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
@@ -71,8 +71,8 @@ def eda_dashboard():
 def graphgia():
     
     st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.title("GraphGia - Data Visualization & Exploration Tool")
-    st.write("GraphGia is a data visualization & Exploration tool. Upload your CSV or Excel files and visualize, explore, clean and manipulate your data easily!")
+    st.title("Data Visualization & Exploration Tool")
+    st.write("This is a data visualization & Exploration tool. Upload your CSV or Excel files and explore, clean and manipulate your data easily!")
 
     # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
