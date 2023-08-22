@@ -42,13 +42,17 @@ def eda_dashboard():
             histogram = st.sidebar.checkbox("Histogram")
             scatter_plot = st.sidebar.checkbox("Scatter Plot")
             correlation_matrix = st.sidebar.checkbox("Correlation Matrix")
+            bar_chart = st.sidebar.checkbox("Bar Chart")
+            scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
 
+            # Hiatogram
             if histogram:
                 st.subheader("Histogram")
                 column = st.selectbox("Select a column for the histogram", df.columns)
                 plt.hist(df[column], bins=20, edgecolor="k")
                 st.pyplot()
-
+                
+            # Scatter Plot
             if scatter_plot:
                 st.subheader("Scatter Plot")
                 x_column = st.selectbox("Select X-axis column", df.columns)
@@ -58,12 +62,26 @@ def eda_dashboard():
                 plt.ylabel(y_column)
                 st.pyplot()
 
+            # Correlation Matrix
             if correlation_matrix:
                 st.subheader("Correlation Matrix")
                 corr_matrix = df.corr()
                 plt.figure(figsize=(10, 8))
                 sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", center=0)
                 st.pyplot()
+                
+            # Bar Chart
+            if bar_chart:
+                st.subheader("Bar Chart")
+                bar_column = st.selectbox("Select a column for the bar chart", df.columns)
+                bar_chart = px.bar(df, x=bar_column)
+                st.plotly_chart(bar_chart, use_container_width=True)
+
+            # Scatter Matrix
+            if scatter_matrix:
+                st.subheader("Scatter Matrix Plot")
+                scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
+                st.plotly_chart(scatter_matrix, use_container_width=True)
 
     if __name__ == "__main__":
         main()
