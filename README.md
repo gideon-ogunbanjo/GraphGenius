@@ -22,6 +22,7 @@ GraphGia is a data visualization & Exploration tool, designed to allow users upl
 - Pandas
 - Matplotlib
 - Plotly
-- openpyxl
+- openpyxl. 
+Dependencies are all listed in the `requirements.txt` file. 
 ### Creator
 Gideon Ogunbanjo.
