@@ -27,17 +27,17 @@ def eda_dashboard():
         st.title("Exploratory Data Analysis Dashboard")
         st.write("This is a data visualization & Exploration tool. Upload your dataset and visualize it interactively!")
 
+        # File Uploader Widget
         uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
         if uploaded_file is not None:
-            # Load the dataset
             df = pd.read_csv(uploaded_file)
 
             # Display basic dataset statistics
             st.write("Dataset Statistics:")
             st.write(df.describe())
 
-            # Display a checkbox for user-selected visualizations
+            # Checkbox for user-selected visualizations
             st.sidebar.title("Select Visualizations")
             histogram = st.sidebar.checkbox("Histogram")
             scatter_plot = st.sidebar.checkbox("Scatter Plot")
