@@ -20,7 +20,7 @@ def main():
         graphgia()
     elif app_mode == "EDA Dashboard":
         eda_dashboard()
-
+# Exploratory Data Analysis Dashboard
 def eda_dashboard():
 
     def main():
@@ -86,7 +86,7 @@ def eda_dashboard():
     if __name__ == "__main__":
         main()
 
-
+# Data Cleaning and Exploration Tool
 def graphgia():
     
     st.set_option('deprecation.showPyplotGlobalUse', False)
