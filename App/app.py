@@ -25,7 +25,7 @@ def eda_dashboard():
 
     def main():
         st.title("Exploratory Data Analysis Dashboard")
-        st.write("Upload your dataset and visualize it interactively!")
+        st.write("This is a data visualization & Exploration tool. Upload your dataset and visualize it interactively!")
 
         uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
