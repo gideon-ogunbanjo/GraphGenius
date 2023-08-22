@@ -9,7 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 
 def main():
     st.sidebar.title("GraphGia - Data Visualization & Exploration tool")
-    st.sidebar.write("GraphGia is a tool used for Data Visualization & Exploration, and Exploratory Data Analysis.")
+    st.sidebar.write("GraphGia is a tool used for Data Visualization, Exploration, and Exploratory Data Analysis.")
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
         ["GraphGia","EDA Dashboard"]
