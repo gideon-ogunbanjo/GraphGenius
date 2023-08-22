@@ -9,20 +9,21 @@ from sklearn.preprocessing import LabelEncoder
 
 def main():
     st.sidebar.title("Choose an Option")
+    st.sidebar.write("Here in this tool, you have both GraphGia - for Data Visualization & Exploration and Nebatt - an interactive Exploratory Data Analysis Dashboard.")
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
-        ["GraphGia","EDA Dashboard"]
+        ["GraphGia","Nebatt"]
     )
 
     if app_mode == "GraphGia":
         graphgia()
-    elif app_mode == "EDA Dashboard":
-        eda_dashboard()
+    elif app_mode == "Nebatt":
+        Nebatt()
 
-def eda_dashboard():
+def Nebatt():
 
     def main():
-        st.title("Exploratory Data Analysis Dashboard")
+        st.title("Nebatt - Exploratory Data Analysis Dashboard")
         st.write("Upload your dataset and explore it interactively!")
 
         uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
