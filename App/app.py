@@ -8,8 +8,8 @@ from sklearn.preprocessing import LabelEncoder
 
 
 def main():
-    st.sidebar.title("GraphGia - Data Visualization & Exploration tool")
-    st.sidebar.write("GraphGia is a tool used for Data Visualization, Exploration, and Exploratory Data Analysis.")
+    st.sidebar.title("GraphGia - Data Cleaning & Exploration tool")
+    st.sidebar.write("GraphGia is a tool used for Data Cleaning, Visualization, and Exploratory Data Analysis.")
     app_mode = st.sidebar.selectbox(
         "Choose the app mode",
         ["GraphGia","EDA Dashboard"]
@@ -71,8 +71,8 @@ def eda_dashboard():
 def graphgia():
     
     st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.title("Data Visualization & Exploration Tool")
-    st.write("This is a data visualization & Exploration tool. Upload your CSV or Excel files and explore, clean and manipulate your data easily!")
+    st.title("Data Cleaning & Exploration Tool")
+    st.write("This is a data cleaning & Exploration tool. Upload your CSV or Excel files and explore, clean and manipulate your data easily!")
 
     # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
