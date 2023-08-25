@@ -10,6 +10,7 @@ GraphGia is a data visualization & Exploration tool, designed to allow users upl
 - Data Cleaning: GraphGia allows users clean their uploaded data by removing duplicate values, null values and label encoding data from the dataset
 - File Download: GraphGia allows users download the converted file in the desired format.
 - In-Built EDA Dashboard: GraphGia has an in-built exploratory data analysis dashboard that alows users Upload your dataset and explore it interactively!
+- Code Snippets: 
 
 ### How to Use
 1. Upload Data: Use the file uploader to select and upload a CSV or Excel file.

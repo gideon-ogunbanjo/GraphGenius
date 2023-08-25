@@ -150,16 +150,16 @@ def eda_dashboard():
             plt.hist(df[column], bins=20, edgecolor="k")
             st.pyplot()
 
-            # Generate Histogram Code
+            # Generated Histogram Code
             hist_code = f"""
-import matplotlib.pyplot as plt
-column = '{column}'
-plt.hist(df[column], bins=20, edgecolor='k')
-plt.xlabel('{column}')
-plt.ylabel('Frequency')
-plt.title('Histogram of {column}')
-plt.show()
-"""
+            import matplotlib.pyplot as plt
+            column = '{column}'
+            plt.hist(df[column], bins=20, edgecolor='k')
+            plt.xlabel('{column}')
+            plt.ylabel('Frequency')
+            plt.title('Histogram of {column}')
+            plt.show()
+            """
             st.code(hist_code, language="python")
 
         # Scatter Plot
@@ -171,18 +171,19 @@ plt.show()
             plt.xlabel(x_column)
             plt.ylabel(y_column)
             st.pyplot()
+            
 
-            # Generate Scatter Plot Code
+            # Generated Scatter Plot Code
             scatter_code = f"""
-import matplotlib.pyplot as plt
-x_column = '{x_column}'
-y_column = '{y_column}'
-plt.scatter(df[x_column], df[y_column])
-plt.xlabel('{x_column}')
-plt.ylabel('{y_column}')
-plt.title('Scatter Plot: {x_column} vs {y_column}')
-plt.show()
-"""
+            import matplotlib.pyplot as plt
+            x_column = '{x_column}'
+            y_column = '{y_column}'
+            plt.scatter(df[x_column], df[y_column])
+            plt.xlabel('{x_column}')
+            plt.ylabel('{y_column}')
+            plt.title('Scatter Plot: {x_column} vs {y_column}')
+            plt.show()
+            """
             st.code(scatter_code, language="python")
 
         # Correlation Matrix
@@ -193,16 +194,16 @@ plt.show()
             sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", center=0)
             st.pyplot()
 
-            # Generate Correlation Matrix Code
+            # Generated Correlation Matrix Code
             corr_code = f"""
-import seaborn as sns
-import matplotlib.pyplot as plt
-corr_matrix = df.corr()
-plt.figure(figsize=(10, 8))
-sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
-plt.title('Correlation Matrix')
-plt.show()
-"""
+            import seaborn as sns
+            import matplotlib.pyplot as plt
+            corr_matrix = df.corr()
+            plt.figure(figsize=(10, 8))
+            sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
+            plt.title('Correlation Matrix')
+            plt.show()
+            """
             st.code(corr_code, language="python")
 
         # Bar Chart
@@ -212,13 +213,13 @@ plt.show()
             bar_chart = px.bar(df, x=bar_column)
             st.plotly_chart(bar_chart, use_container_width=True)
 
-            # Generate Bar Chart Code
+            # Generated Bar Chart Code
             bar_code = f"""
-import plotly.express as px
-bar_column = '{bar_column}'
-bar_chart = px.bar(df, x=bar_column)
-bar_chart.show()
-"""
+            import plotly.express as px
+            bar_column = '{bar_column}'
+            bar_chart = px.bar(df, x=bar_column)
+            bar_chart.show()
+            """
             st.code(bar_code, language="python")
 
         # Scatter Matrix
@@ -231,10 +232,10 @@ bar_chart.show()
 
             # Generated Scatter Matrix Code
             scatter_matrix_code = f"""
-import plotly.express as px
-scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
-scatter_matrix.show()
-"""
+            import plotly.express as px
+            scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
+            scatter_matrix.show()
+            """
             st.code(scatter_matrix_code, language="python")
 
 
