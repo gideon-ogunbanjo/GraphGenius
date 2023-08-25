@@ -26,36 +26,36 @@ def main():
 # GraphGia
 def generate_analysis_code(data):
     analysis_code = f"""
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    from sklearn.preprocessing import LabelEncoder
 
-# Load the data
-data = pd.read_csv('your_uploaded_data.csv')
+    # Load the data
+    data = pd.read_csv('your_uploaded_data.csv')
 
-# Display basic dataset statistics
-print("Dataset Statistics: ")
-print(data.describe())
+    # Display basic dataset statistics
+    print("Dataset Statistics: ")
+    print(data.describe())
 
-# Data Manipulation
-print("Data Manipulation")
+    # Data Manipulation
+    print("Data Manipulation")
 
-# ... (replace this section with your actual data manipulation code)
+    # ... (replace this section with your actual data manipulation code)
 
-# Data Cleaning
-print("Data Cleaning")
-cleaned_data = data.dropna().drop_duplicates()
+    # Data Cleaning
+    print("Data Cleaning")
+    cleaned_data = data.dropna().drop_duplicates()
 
-label_encoder = LabelEncoder()
-categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
-for col in categorical_columns:
-    if col in cleaned_data.columns:
-        cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
+    label_encoder = LabelEncoder()
+    categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
+    for col in categorical_columns:
+        if col in cleaned_data.columns:
+            cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
 
-print("Data cleaned and encoded successfully!")
-data = cleaned_data
-"""
+    print("Data cleaned and encoded successfully!")
+    data = cleaned_data
+    """
 
     return analysis_code
 
