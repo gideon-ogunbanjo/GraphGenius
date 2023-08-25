@@ -10,7 +10,8 @@ GraphGia is a data visualization & Exploration tool, designed to allow users upl
 - Data Cleaning: GraphGia allows users clean their uploaded data by removing duplicate values, null values and label encoding data from the dataset
 - File Download: GraphGia allows users download the converted file in the desired format.
 - In-Built EDA Dashboard: GraphGia has an in-built exploratory data analysis dashboard that alows users Upload your dataset and explore it interactively!
-- Code Snippets: 
+- Code Generation for Data Analysis: GraphGia streamlines the data analysis process by generating code snippets that encapsulate crucial steps. Upon uploading a CSV or Excel file, the tool automatically loads the data and offers insights through descriptive statistics. Users can explore the data, manipulate it, and perform essential cleaning operations. GraphGia then generates Python code that reproduces these actions, fostering reproducibility in analysis.
+- Code Snippets for Visualization: Enhancing data exploration, GraphGia generates code snippets for visualization. Users can select from a range of visualizations like histograms, scatter plots, correlation matrices, and more. As users interact with the data in the dashboard, the tool generates corresponding Python code snippets that can be integrated into projects. This feature accelerates the process of creating insightful visualizations for effective data communication.
 
 ### How to Use
 1. Upload Data: Use the file uploader to select and upload a CSV or Excel file.
