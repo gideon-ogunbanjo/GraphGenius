@@ -124,6 +124,7 @@ def eda_dashboard():
         box_plot = st.sidebar.checkbox("Box Plot")
         pair_plot = st.sidebar.checkbox("Pair Plot")
         count_plot = st.sidebar.checkbox("Count Plot")
+        dist_plot = st.sidebar.checkbox("Distribution Plot")
 
         # Histogram
         if histogram:
@@ -273,6 +274,27 @@ def eda_dashboard():
             plt.show()
             """
             st.code(count_plot_code, language="python")
+        
+        # Distribution Plot
+        if dist_plot:
+            dist_column = st.selectbox("Select a column for the distribution plot", df.columns)
+            sns.histplot(df[dist_column], kde=True)
+            plt.xlabel(dist_column)
+            plt.ylabel("Density")
+            st.pyplot()
+
+            # Generated Distribution Plot Code
+            st.write("**Generated Distribution Plot Code**")
+            dist_plot_code = f"""
+            dist_column = '{dist_column}'
+            sns.histplot(df['{dist_column}'], kde=True)
+            plt.xlabel('{dist_column}')
+            plt.ylabel('Density')
+            plt.title('Distribution Plot: {dist_column}')
+            plt.show()
+            """
+            st.code(dist_plot_code, language="python")
+
 
 
 
