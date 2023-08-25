@@ -7,7 +7,6 @@ GraphGia is a data visualization & Exploration tool, designed to allow users upl
 - File Upload: GraphGia sllows users upload CSV or Excel files to visualize and explore data.
 - Data Visualization: GraphGia generates a Plotly line plot and a seaborn heatmap based on chosen columns.
 - Dataset Description: GraphGia displays extended statistical information about the dataset. It shows extended dataset information including data types and non-null counts.
-- File Conversion: GraphGia allows users convert uploaded data between CSV and Excel formats.
 - Data Cleaning: GraphGia allows users clean their uploaded data by removing duplicate values, null values and label encoding data from the dataset
 - File Download: GraphGia allows users download the converted file in the desired format.
 - In-Built EDA Dashboard: GraphGia has an in-built exploratory data analysis dashboard that alows users Upload your dataset and explore it interactively!

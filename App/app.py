@@ -78,7 +78,7 @@ def graphgia():
 
         st.write("Uploaded Data:", data)
 
-        # Additional Information Button
+        # Additional Information Button - Data Description
         if st.button("Show Extended Dataset Information"):
             st.subheader("Dataset Description")
             description = data.describe()
