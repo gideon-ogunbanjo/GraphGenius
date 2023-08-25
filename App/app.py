@@ -6,104 +6,59 @@ import io
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
-
 def main():
-    st.sidebar.title("GraphGia - Data Cleaning & Exploration tool")
-    st.sidebar.write(
-        "GraphGia is a tool used for Data Cleaning, Visualization, and Exploratory Data Analysis."
-    )
+    st.sidebar.title("GraphGia - Data Cleaning & Exploration Tool")
+    st.sidebar.write("GraphGia is a tool for Data Cleaning, Visualization, and Exploratory Data Analysis.")
     st.sidebar.write("🫶")
-    app_mode = st.sidebar.selectbox(
-        "Choose the app mode", ["GraphGia", "EDA Dashboard"]
-    )
+    app_mode = st.sidebar.selectbox("Choose the app mode", ["GraphGia", "EDA Dashboard"])
 
     if app_mode == "GraphGia":
         graphgia()
     elif app_mode == "EDA Dashboard":
         eda_dashboard()
+        
+# GraphGia
 
+def generate_analysis_code(data):
+    analysis_code = f"""
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
 
-# Exploratory Data Analysis Dashboard
-def eda_dashboard():
-    def main():
-        st.title("Exploratory Data Analysis Dashboard")
-        st.write(
-            "This is a data visualization & Exploration tool. Upload your dataset and visualize it interactively!"
-        )
+# Load the data
+data = pd.read_csv('your_uploaded_data.csv')
 
-        # File Uploader Widget
-        uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
+# Display basic dataset statistics
+print("Dataset Statistics: ")
+print(data.describe())
 
-        if uploaded_file is not None:
-            df = pd.read_csv(uploaded_file)
+# Data Manipulation
+print("Data Manipulation")
 
-            # Display basic dataset statistics
-            st.write("Dataset Statistics:")
-            st.write(df.describe())
+# ... (replace this section with your actual data manipulation code)
 
-            # Checkbox for user-selected visualizations
-            st.sidebar.title("Select Visualizations")
-            histogram = st.sidebar.checkbox("Histogram")
-            scatter_plot = st.sidebar.checkbox("Scatter Plot")
-            correlation_matrix = st.sidebar.checkbox("Correlation Matrix")
-            bar_chart = st.sidebar.checkbox("Bar Chart")
-            scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
+# Data Cleaning
+print("Data Cleaning")
+cleaned_data = data.dropna().drop_duplicates()
 
-            # Hiatogram
-            if histogram:
-                st.subheader("Histogram")
-                column = st.selectbox("Select a column for the histogram", df.columns)
-                plt.hist(df[column], bins=20, edgecolor="k")
-                st.pyplot()
+label_encoder = LabelEncoder()
+categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
+for col in categorical_columns:
+    if col in cleaned_data.columns:
+        cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
 
-            # Scatter Plot
-            if scatter_plot:
-                st.subheader("Scatter Plot")
-                x_column = st.selectbox("Select X-axis column", df.columns)
-                y_column = st.selectbox("Select Y-axis column", df.columns)
-                plt.scatter(df[x_column], df[y_column])
-                plt.xlabel(x_column)
-                plt.ylabel(y_column)
-                st.pyplot()
+print("Data cleaned and encoded successfully!")
+data = cleaned_data
+"""
 
-            # Correlation Matrix
-            if correlation_matrix:
-                st.subheader("Correlation Matrix")
-                corr_matrix = df.corr()
-                plt.figure(figsize=(10, 8))
-                sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", center=0)
-                st.pyplot()
+    return analysis_code
 
-            # Bar Chart
-            if bar_chart:
-                st.subheader("Bar Chart")
-                bar_column = st.selectbox(
-                    "Select a column for the bar chart", df.columns
-                )
-                bar_chart = px.bar(df, x=bar_column)
-                st.plotly_chart(bar_chart, use_container_width=True)
-
-            # Scatter Matrix
-            if scatter_matrix:
-                st.subheader("Scatter Matrix Plot")
-                scatter_matrix = px.scatter_matrix(
-                    df, dimensions=df.columns, title="Scatter Matrix"
-                )
-                st.plotly_chart(scatter_matrix, use_container_width=True)
-
-    if __name__ == "__main__":
-        main()
-
-
-# Data Cleaning and Exploration Tool
 def graphgia():
     st.set_option("deprecation.showPyplotGlobalUse", False)
-    st.title("Data Cleaning & Exploration Tool")
-    st.write(
-        "This is a data cleaning & Exploration tool. Upload your CSV or Excel files and explore, clean and manipulate your data easily!"
-    )
+    st.title("GraphGia - Data Cleaning & Exploration Tool")
+    st.write("This is a data cleaning & exploration tool.")
 
-    # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
 
     if uploaded_file is not None:
@@ -115,19 +70,6 @@ def graphgia():
             st.error("Unsupported file format. Please upload a CSV or Excel file.")
 
         st.write("Uploaded Data:", data)
-        # # Seaborn Heatmap
-        # # Show Heatmap Button
-        # if st.button("Show Dataset Heatmap"):
-        #     st.subheader("Seaborn Heatmap")
-        #     plt.figure(figsize=(10, 6))
-
-        #     # Select numeric columns for heatmap
-        #     numeric_columns = data.select_dtypes(include=['float64', 'int64']).columns
-        #     selected_columns = st.multiselect("Select Columns for Heatmap", numeric_columns)
-
-        #     if selected_columns:
-        #         sns.heatmap(data[selected_columns].corr(), annot=True, cmap='coolwarm')
-        #         st.pyplot()
 
         # Additional Information Button
         if st.button("Show Extended Dataset Information"):
@@ -135,81 +77,140 @@ def graphgia():
             description = data.describe()
             st.write(description)
 
-        # Data Manipulation
-        st.subheader("Data Manipulation")
-        st.write("Perform simple data transformation operations:")
+        # ... (rest of the GraphGia code)
 
-        operation = st.selectbox(
-            "Select Operation", ["Select Columns", "Filter Rows", "Sort Data"]
-        )
+        # Generate Analysis Code and Download
+        if st.button("Generate Analysis Code"):
+            analysis_code = generate_analysis_code(data)
 
-        if operation == "Select Columns":
-            selected_columns = st.multiselect("Select Columns", data.columns)
-            if selected_columns:
-                st.write(data[selected_columns])
+            st.subheader("Generated Analysis Code")
+            st.code(analysis_code, language="python")
 
-        elif operation == "Filter Rows":
-            column = st.selectbox("Select Column for Filtering", data.columns)
-            value = st.text_input(f"Enter Value for {column}:", "")
-            if value:
-                filtered_data = data[data[column] == value]
-                st.write(filtered_data)
+            # Download link for the generated code
+            st.download_button(
+                label="Download Analysis Code",
+                data=analysis_code,
+                file_name="analysis_code.py",
+                mime="text/plain"
+            )
+            
+# EDA Dashboard
+def eda_dashboard():
+    st.title("EDA Dashboard")
+    st.write("This is an exploratory data analysis dashboard.")
 
-        elif operation == "Sort Data":
-            sort_column = st.selectbox("Select Column for Sorting", data.columns)
-            ascending = st.checkbox("Ascending Order")
-            sorted_data = data.sort_values(by=sort_column, ascending=ascending)
-            st.write(sorted_data)
+    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
-        # Data Cleaning Button
-        if st.button("Clean Data"):
-            cleaned_data = data.dropna().drop_duplicates()
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
 
-            # Label Encoding
-            label_encoder = LabelEncoder()
-            categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
-            for col in categorical_columns:
-                if col in cleaned_data.columns:
-                    cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
+        st.write("Dataset Statistics:")
+        st.write(df.describe())
 
-            st.write("Data cleaned and encoded successfully!")
-            data = cleaned_data
+        # Checkbox for user-selected visualizations
+        st.sidebar.title("Select Visualizations")
+        histogram = st.sidebar.checkbox("Histogram")
+        scatter_plot = st.sidebar.checkbox("Scatter Plot")
+        correlation_matrix = st.sidebar.checkbox("Correlation Matrix")
+        bar_chart = st.sidebar.checkbox("Bar Chart")
+        scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
 
-        # Conversion and Download
-        st.subheader("Convert and Download")
-        conversion_format = st.radio("Convert to:", ["CSV", "Excel"])
-        if st.button("Convert and Download"):
-            if conversion_format == "CSV":
-                converted_file = io.BytesIO()
-                data.to_csv(converted_file, index=False)
-                st.download_button(
-                    "Download Converted File",
-                    converted_file.getvalue(),
-                    file_name="converted_data.csv",
-                )
-            elif conversion_format == "Excel":
-                converted_file = io.BytesIO()
-                data.to_excel(converted_file, index=False, engine="openpyxl")
-                st.download_button(
-                    "Download Converted File",
-                    converted_file.getvalue(),
-                    file_name="converted_data.xlsx",
-                )
+        # Histogram
+        if histogram:
+            st.subheader("Histogram")
+            column = st.selectbox("Select a column for the histogram", df.columns)
+            plt.hist(df[column], bins=20, edgecolor="k")
+            st.pyplot()
 
-        # Data Visualization
-        st.sidebar.subheader("Choose Columns for Visualization")
-        x_column = st.sidebar.selectbox("X Axis", data.columns)
-        y_column = st.sidebar.selectbox("Y Axis", data.columns)
+            # Generate Histogram Code
+            hist_code = f"""
+import matplotlib.pyplot as plt
+column = '{column}'
+plt.hist(df[column], bins=20, edgecolor='k')
+plt.xlabel('{column}')
+plt.ylabel('Frequency')
+plt.title('Histogram of {column}')
+plt.show()
+"""
+            st.code(hist_code, language="python")
 
-        st.subheader("Plotly Line Plot")
+        # Scatter Plot
+        if scatter_plot:
+            st.subheader("Scatter Plot")
+            x_column = st.selectbox("Select X-axis column", df.columns)
+            y_column = st.selectbox("Select Y-axis column", df.columns)
+            plt.scatter(df[x_column], df[y_column])
+            plt.xlabel(x_column)
+            plt.ylabel(y_column)
+            st.pyplot()
 
-        if st.sidebar.button("Generate Plotly Line Plot"):
-            fig = px.line(data, x=x_column, y=y_column, title="Line Plot")
-            st.plotly_chart(fig, use_container_width=True)
+            # Generate Scatter Plot Code
+            scatter_code = f"""
+import matplotlib.pyplot as plt
+x_column = '{x_column}'
+y_column = '{y_column}'
+plt.scatter(df[x_column], df[y_column])
+plt.xlabel('{x_column}')
+plt.ylabel('{y_column}')
+plt.title('Scatter Plot: {x_column} vs {y_column}')
+plt.show()
+"""
+            st.code(scatter_code, language="python")
 
+        # Correlation Matrix
+        if correlation_matrix:
+            st.subheader("Correlation Matrix")
+            corr_matrix = df.corr()
+            plt.figure(figsize=(10, 8))
+            sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", center=0)
+            st.pyplot()
+
+            # Generate Correlation Matrix Code
+            corr_code = f"""
+import seaborn as sns
+import matplotlib.pyplot as plt
+corr_matrix = df.corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title('Correlation Matrix')
+plt.show()
+"""
+            st.code(corr_code, language="python")
+
+        # Bar Chart
+        if bar_chart:
+            st.subheader("Bar Chart")
+            bar_column = st.selectbox("Select a column for the bar chart", df.columns)
+            bar_chart = px.bar(df, x=bar_column)
+            st.plotly_chart(bar_chart, use_container_width=True)
+
+            # Generate Bar Chart Code
+            bar_code = f"""
+import plotly.express as px
+bar_column = '{bar_column}'
+bar_chart = px.bar(df, x=bar_column)
+bar_chart.show()
+"""
+            st.code(bar_code, language="python")
+
+        # Scatter Matrix
+        if scatter_matrix:
+            st.subheader("Scatter Matrix Plot")
+            scatter_matrix = px.scatter_matrix(
+                df, dimensions=df.columns, title="Scatter Matrix"
+            )
+            st.plotly_chart(scatter_matrix, use_container_width=True)
+
+            # Generate Scatter Matrix Code
+            scatter_matrix_code = f"""
+import plotly.express as px
+scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
+scatter_matrix.show()
+"""
+            st.code(scatter_matrix_code, language="python")
 
 if __name__ == "__main__":
     main()
-# Reference Links
-link = "Created by [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app)"
-st.markdown(link, unsafe_allow_html=True)
+
+link = "Created by Gideon Ogunbanjo"
+st.markdown(link)
