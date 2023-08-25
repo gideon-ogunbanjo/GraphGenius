@@ -6,18 +6,25 @@ import io
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
+
 def main():
     st.sidebar.title("GraphGia - Data Cleaning & Exploration Tool")
-    st.sidebar.write("GraphGia is a tool for Data Cleaning, Visualization, and Exploratory Data Analysis.")
+    st.sidebar.write(
+        "GraphGia is a tool for Data Cleaning, Visualization, and Exploratory Data Analysis."
+    )
     st.sidebar.write("🫶")
-    app_mode = st.sidebar.selectbox("Choose the app mode", ["GraphGia", "EDA Dashboard"])
+    app_mode = st.sidebar.selectbox(
+        "Choose the app mode", ["GraphGia", "EDA Dashboard"]
+    )
 
     if app_mode == "GraphGia":
         graphgia()
     elif app_mode == "EDA Dashboard":
         eda_dashboard()
-        
+
+
 # GraphGia
+
 
 def generate_analysis_code(data):
     analysis_code = f"""
@@ -54,11 +61,13 @@ data = cleaned_data
 
     return analysis_code
 
+
 def graphgia():
     st.set_option("deprecation.showPyplotGlobalUse", False)
     st.title("GraphGia - Data Cleaning & Exploration Tool")
     st.write("This is a data cleaning & exploration tool.")
 
+    # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
 
     if uploaded_file is not None:
@@ -77,23 +86,22 @@ def graphgia():
             description = data.describe()
             st.write(description)
 
-        # ... (rest of the GraphGia code)
-
-        # Generate Analysis Code and Download
-        if st.button("Generate Analysis Code"):
+        # Generate Code Analysis 
+        if st.button("Generate Code Analysis"):
             analysis_code = generate_analysis_code(data)
 
-            st.subheader("Generated Analysis Code")
+            st.subheader("Generated Code Analysis")
             st.code(analysis_code, language="python")
 
             # Download link for the generated code
             st.download_button(
-                label="Download Analysis Code",
+                label="Download Code Analysis",
                 data=analysis_code,
                 file_name="analysis_code.py",
-                mime="text/plain"
+                mime="text/plain",
             )
-            
+
+
 # EDA Dashboard
 def eda_dashboard():
     st.title("EDA Dashboard")
@@ -201,13 +209,14 @@ bar_chart.show()
             )
             st.plotly_chart(scatter_matrix, use_container_width=True)
 
-            # Generate Scatter Matrix Code
+            # Generated Scatter Matrix Code
             scatter_matrix_code = f"""
 import plotly.express as px
 scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
 scatter_matrix.show()
 """
             st.code(scatter_matrix_code, language="python")
+
 
 if __name__ == "__main__":
     main()
