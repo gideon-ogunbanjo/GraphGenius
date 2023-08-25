@@ -151,6 +151,7 @@ def eda_dashboard():
             st.pyplot()
 
             # Generated Histogram Code
+            st.write("**Generated Histogram Code:**")
             hist_code = f"""
             import matplotlib.pyplot as plt
             column = '{column}'
@@ -174,6 +175,7 @@ def eda_dashboard():
             
 
             # Generated Scatter Plot Code
+            st.write("**Generated Scatter Plot Code:**")
             scatter_code = f"""
             import matplotlib.pyplot as plt
             x_column = '{x_column}'
@@ -195,6 +197,7 @@ def eda_dashboard():
             st.pyplot()
 
             # Generated Correlation Matrix Code
+            st.write("**Generated Correlation Matrix Code**")
             corr_code = f"""
             import seaborn as sns
             import matplotlib.pyplot as plt
@@ -214,6 +217,7 @@ def eda_dashboard():
             st.plotly_chart(bar_chart, use_container_width=True)
 
             # Generated Bar Chart Code
+            st.write("**Generated Bar Chart Code**")    
             bar_code = f"""
             import plotly.express as px
             bar_column = '{bar_column}'
@@ -231,6 +235,7 @@ def eda_dashboard():
             st.plotly_chart(scatter_matrix, use_container_width=True)
 
             # Generated Scatter Matrix Code
+            st.write("**Generated Scatter Matrix Code**")
             scatter_matrix_code = f"""
             import plotly.express as px
             scatter_matrix = px.scatter_matrix(df, dimensions=df.columns, title='Scatter Matrix')
