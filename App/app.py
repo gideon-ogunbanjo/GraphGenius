@@ -122,6 +122,7 @@ def eda_dashboard():
         bar_chart = st.sidebar.checkbox("Bar Chart")
         scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
         box_plot = st.sidebar.checkbox("Box Plot")
+        pair_plot = st.sidebar.checkbox("Pair Plot")
 
         # Histogram
         if histogram:
@@ -241,6 +242,21 @@ def eda_dashboard():
             plt.show()
             """
             st.code(box_code, language="python")
+        
+        # Pair Plot
+        if pair_plot:
+            pair_plot = sns.pairplot(df)
+            st.pyplot()
+
+            # Generated Pair Plot Code
+            st.write("**Generated Pair Plot Code**")
+            pair_plot_code = """
+            import seaborn as sns
+            pair_plot = sns.pairplot(df)
+            plt.show()
+            """
+            st.code(pair_plot_code, language="python")
+
 
 
 
