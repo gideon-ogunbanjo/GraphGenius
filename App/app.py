@@ -123,6 +123,7 @@ def eda_dashboard():
         scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
         box_plot = st.sidebar.checkbox("Box Plot")
         pair_plot = st.sidebar.checkbox("Pair Plot")
+        count_plot = st.sidebar.checkbox("Count Plot")
 
         # Histogram
         if histogram:
@@ -256,6 +257,23 @@ def eda_dashboard():
             plt.show()
             """
             st.code(pair_plot_code, language="python")
+            
+        # Count Plot
+        if count_plot:
+            # Count Plot
+            count_column = st.selectbox("Select a column for the count plot", df.columns)
+            count_plot = sns.countplot(data=df, x=count_column)
+            st.pyplot()
+
+            # Generated Count Plot Code
+            st.write("**Generated Count Plot Code**")
+            count_plot_code = f"""
+            count_column = '{count_column}'
+            count_plot = sns.countplot(data=df, x='{count_column}')
+            plt.show()
+            """
+            st.code(count_plot_code, language="python")
+
 
 
 
