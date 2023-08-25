@@ -24,8 +24,6 @@ def main():
 
 
 # GraphGia
-
-
 def generate_analysis_code(data):
     analysis_code = f"""
 import pandas as pd
@@ -85,8 +83,9 @@ def graphgia():
             st.subheader("Dataset Description")
             description = data.describe()
             st.write(description)
-
-        # Generate Code Analysis 
+            
+            
+        # Generate Code Analysis
         if st.button("Generate Code Analysis"):
             analysis_code = generate_analysis_code(data)
 
@@ -100,7 +99,28 @@ def graphgia():
             #     file_name="analysis_code.py",
             #     mime="text/plain",
             # )
+        
+        # Data Cleaning
+        cleaned_data = data.dropna().drop_duplicates()
+        label_encoder = LabelEncoder()
+        categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
+        for col in categorical_columns:
+            if col in cleaned_data.columns:
+                cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
+                st.write("Data cleaned and encoded successfully!")
+        data = cleaned_data
 
+        # Download Cleaned Data
+        cleaned_file = st.button("Download Cleaned Data")
+        if cleaned_file:
+            cleaned_file_name = "cleaned_data.csv"
+            cleaned_data.to_csv(cleaned_file_name, index=False)
+            st.download_button(
+                label="Download Cleaned Data",
+                data=cleaned_file_name,
+                file_name=cleaned_file_name,
+                mime="text/csv",
+            )
 
 # EDA Dashboard
 def eda_dashboard():
