@@ -121,6 +121,7 @@ def eda_dashboard():
         correlation_matrix = st.sidebar.checkbox("Correlation Matrix")
         bar_chart = st.sidebar.checkbox("Bar Chart")
         scatter_matrix = st.sidebar.checkbox("Scatter Matrix")
+        box_plot = st.sidebar.checkbox("Box Plot")
 
         # Histogram
         if histogram:
@@ -220,6 +221,28 @@ def eda_dashboard():
             scatter_matrix.show()
             """
             st.code(scatter_matrix_code, language="python")
+            
+        # Box Plot
+        if box_plot:
+            box_column = st.selectbox("Select a column for the box plot", df.columns)
+            plt.boxplot(df[box_column])
+            plt.xlabel(box_column)
+            plt.ylabel("Value")
+            st.pyplot()
+            
+            # Generated Box Plot Code
+            st.write("**Generated Box Plot Code**")
+            box_code = f"""
+            box_column = '{box_column}'
+            plt.boxplot(df[box_column])
+            plt.xlabel('{box_column}')
+            plt.ylabel('Value')
+            plt.title('Box Plot: {box_column}')
+            plt.show()
+            """
+            st.code(box_code, language="python")
+
+
 
 
 if __name__ == "__main__":
