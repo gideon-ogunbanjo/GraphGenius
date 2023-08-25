@@ -93,13 +93,13 @@ def graphgia():
             st.subheader("Generated Code Analysis")
             st.code(analysis_code, language="python")
 
-            # Download link for the generated code
-            st.download_button(
-                label="Download Code Analysis",
-                data=analysis_code,
-                file_name="analysis_code.py",
-                mime="text/plain",
-            )
+            # # Download link for the generated code
+            # st.download_button(
+            #     label="Download Code Analysis",
+            #     data=analysis_code,
+            #     file_name="analysis_code.py",
+            #     mime="text/plain",
+            # )
 
 
 # EDA Dashboard
