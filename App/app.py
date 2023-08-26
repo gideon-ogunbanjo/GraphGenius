@@ -125,6 +125,7 @@ def eda_dashboard():
         pair_plot = st.sidebar.checkbox("Pair Plot")
         count_plot = st.sidebar.checkbox("Count Plot")
         dist_plot = st.sidebar.checkbox("Distribution Plot")
+        pie_chart = st.sidebar.checkbox("Pie Chart")
 
         # Histogram
         if histogram:
@@ -294,6 +295,27 @@ def eda_dashboard():
             plt.show()
             """
             st.code(dist_plot_code, language="python")
+            
+        # Pie Chart
+        if pie_chart:
+            pie_column = st.selectbox("Select a categorical column for the pie chart", df.columns)
+            pie_data = df[pie_column].value_counts()
+            plt.pie(pie_data, labels=pie_data.index, autopct="%1.1f%%", startangle=140)
+            plt.axis("equal")
+            st.pyplot()
+
+            # Generated Pie Chart Code
+            st.write("**Generated Pie Chart Code**")
+            pie_chart_code = f"""
+            pie_column = '{pie_column}'
+            pie_data = df['{pie_column}'].value_counts()
+            plt.pie(pie_data, labels=pie_data.index, autopct="%1.1f%%", startangle=140)
+            plt.axis("equal")
+            plt.title('Pie Chart: {pie_column}')
+            plt.show()
+            """
+            st.code(pie_chart_code, language="python")
+
 
 
 
