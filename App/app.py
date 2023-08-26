@@ -365,16 +365,6 @@ def eda_dashboard():
             """
             st.code(violin_code, language="python")
 
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     main()
 
