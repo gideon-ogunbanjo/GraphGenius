@@ -5,6 +5,7 @@ import plotly.express as px
 import io
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
+from wordcloud import wordcloud
 
 
 def main():
@@ -127,6 +128,7 @@ def eda_dashboard():
         dist_plot = st.sidebar.checkbox("Distribution Plot")
         pie_chart = st.sidebar.checkbox("Pie Chart")
         time_series = st.sidebar.checkbox("Time Series Plot")
+        violin_plot = st.sidebar.checkbox("Violin Plot")
 
         # Histogram
         if histogram:
@@ -345,6 +347,24 @@ def eda_dashboard():
             plt.show()
             """
             st.code(time_series_code, language="python")
+        
+        # Violin Plot
+        if violin_plot:
+            violin_x = st.selectbox("Select a categorical column for X-axis", df.columns)
+            violin_y = st.selectbox("Select a numerical column for Y-axis", df.columns)
+            sns.violinplot(data=df, x=violin_x, y=violin_y)
+            st.pyplot()
+
+            # Generated Violin Plot Code
+            st.write("**Generated Violin Plot Code**")
+            violin_code = f"""
+            violin_x = '{violin_x}'
+            violin_y = '{violin_y}'
+            sns.violinplot(data=df, x='{violin_x}', y='{violin_y}')
+            plt.show()
+            """
+            st.code(violin_code, language="python")
+
 
 
 
