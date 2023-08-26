@@ -126,6 +126,7 @@ def eda_dashboard():
         count_plot = st.sidebar.checkbox("Count Plot")
         dist_plot = st.sidebar.checkbox("Distribution Plot")
         pie_chart = st.sidebar.checkbox("Pie Chart")
+        time_series = st.sidebar.checkbox("Time Series Plot")
 
         # Histogram
         if histogram:
@@ -315,6 +316,37 @@ def eda_dashboard():
             plt.show()
             """
             st.code(pie_chart_code, language="python")
+            
+        # Time Series Plot
+        if time_series:
+            time_column = st.selectbox("Select the time-based column", df.columns)
+            df[time_column] = pd.to_datetime(df[time_column])
+            df.set_index(time_column, inplace=True)
+
+            # Select Y-axis column for the time series plot
+            y_column = st.selectbox("Select Y-axis column", df.columns)
+
+            plt.plot(df.index, df[y_column])
+            plt.xlabel("Time")
+            plt.ylabel(y_column)
+            st.pyplot()
+
+            # Generated Time Series Plot Code
+            st.write("**Generated Time Series Plot Code**")
+            time_series_code = f"""
+            time_column = '{time_column}'
+            df['{time_column}'] = pd.to_datetime(df['{time_column}'])
+            df.set_index('{time_column}', inplace=True)
+            y_column = '{y_column}'
+            plt.plot(df.index, df['{y_column}'])
+            plt.xlabel('Time')
+            plt.ylabel('{y_column}')
+            plt.title('Time Series Plot: {y_column} over Time')
+            plt.show()
+            """
+            st.code(time_series_code, language="python")
+
+
 
 
 
