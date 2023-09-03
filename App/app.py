@@ -1,3 +1,4 @@
+# Libraires
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,7 +8,7 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from wordcloud import wordcloud
 
-
+# Main Function
 def main():
     st.sidebar.title("GraphGia - Data Cleaning & Exploration Tool")
     st.sidebar.write(
@@ -24,7 +25,7 @@ def main():
         eda_dashboard()
 
 
-# GraphGia
+# Analysis Code Snippet
 def generate_analysis_code(data):
     analysis_code = f"""
     import pandas as pd
@@ -61,7 +62,7 @@ def generate_analysis_code(data):
 
     return analysis_code
 
-
+# GraphGia
 def graphgia():
     st.set_option("deprecation.showPyplotGlobalUse", False)
     st.title("GraphGia - Data Cleaning & Exploration Tool")
@@ -86,7 +87,7 @@ def graphgia():
             description = data.describe()
             st.write(description)
 
-        # Generate Code Analysis
+        # Code Analysis Generators
         if st.button("Generate Code Analysis"):
             analysis_code = generate_analysis_code(data)
 
