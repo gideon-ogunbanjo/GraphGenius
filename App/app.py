@@ -7,6 +7,8 @@ import io
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from wordcloud import wordcloud
+import streamlit.components.v1 as components
+from tempfile import NamedTemporaryFile
 
 # Main Function
 def main():
@@ -86,6 +88,45 @@ def graphgia():
             st.subheader("Dataset Description")
             description = data.describe()
             st.write(description)
+            
+            # Data Export Function
+        def export_data(data, file_format):
+            if file_format == "CSV":
+                # Export to CSV
+                csv_file = data.to_csv(index=False)
+                st.download_button(
+                    label="Download CSV",
+                    data=csv_file,
+                    file_name="exported_data.csv",
+                    mime="text/csv",
+                )
+            elif file_format == "Excel":
+                # Export to Excel
+                excel_file = data.to_excel(index=False)
+                st.download_button(
+                    label="Download Excel",
+                    data=excel_file,
+                    file_name="exported_data.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                )
+
+        # Code Download Function
+        def download_code(analysis_code):
+            with NamedTemporaryFile(delete=False, suffix=".py") as tmp_file:
+                tmp_file.write(analysis_code.encode())
+                tmp_file.seek(0)
+                st.download_button(
+                    label="Download Code Analysis",
+                    data=tmp_file.name,
+                    file_name="analysis_code.py",
+                    mime="text/plain",
+                )
+
+        # Data Export Section
+        if st.button("Export Data"):
+            st.subheader("Data Export")
+            export_format = st.radio("Select export format:", ["CSV", "Excel"])
+            export_data(data, export_format)
 
         # Code Analysis Generators
         if st.button("Generate Code Analysis"):
@@ -93,14 +134,6 @@ def graphgia():
 
             st.subheader("Generated Code Analysis")
             st.code(analysis_code, language="python")
-
-            # # Download link for the generated code
-            # st.download_button(
-            #     label="Download Code Analysis",
-            #     data=analysis_code,
-            #     file_name="analysis_code.py",
-            #     mime="text/plain",
-            # )
 
 
 # EDA Dashboard
