@@ -27,42 +27,39 @@ def main():
         eda_dashboard()
 
 
-# Analysis Code Snippet
-def generate_analysis_code(data):
-    analysis_code = f"""
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    from sklearn.preprocessing import LabelEncoder
 
-    # Load the data
-    data = pd.read_csv('your_uploaded_data.csv')
+# Data Cleaning Function
+def clean_data(data):
+    st.subheader("Data Cleaning")
 
-    # Display basic dataset statistics
-    print("Dataset Statistics: ")
-    print(data.describe())
+    # Remove Null Values
+    data = data.dropna()
 
-    # Data Manipulation
-    print("Data Manipulation")
+    # Remove Duplicate Values
+    data = data.drop_duplicates()
 
-    # ... (replace this section with your actual data manipulation code)
-
-    # Data Cleaning
-    print("Data Cleaning")
-    cleaned_data = data.dropna().drop_duplicates()
-
-    #Label Encoding
+    # Label Encoding for Categorical Columns
+    categorical_columns = data.select_dtypes(include=["object"]).columns
     label_encoder = LabelEncoder()
-    categorical_columns = cleaned_data.select_dtypes(include=["object"]).columns
     for col in categorical_columns:
-        if col in cleaned_data.columns:
-            cleaned_data[col] = label_encoder.fit_transform(cleaned_data[col])
+        data[col] = label_encoder.fit_transform(data[col])
 
-    print("Data cleaned and encoded successfully!")
-    data = cleaned_data
-    """
+    st.write("Data cleaned successfully!")
+    return data
 
-    return analysis_code
+# Data Export Function
+def export_data(data, file_format):
+    if file_format == "CSV":
+        # Export to CSV
+        csv_file = data.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv_file,
+            file_name="exported_data.csv",
+            mime="text/csv",
+        )
+    else:
+        st.write("An error occured")
 
 # GraphGia
 def graphgia():
@@ -88,52 +85,16 @@ def graphgia():
             st.subheader("Dataset Description")
             description = data.describe()
             st.write(description)
-            
-            # Data Export Function
-        def export_data(data, file_format):
-            if file_format == "CSV":
-                # Export to CSV
-                csv_file = data.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv_file,
-                    file_name="exported_data.csv",
-                    mime="text/csv",
-                )
-            elif file_format == "Excel":
-                # Export to Excel
-                excel_file = data.to_excel(index=False)
-                st.download_button(
-                    label="Download Excel",
-                    data=excel_file,
-                    file_name="exported_data.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                )
 
-        # Code Download Function
-        def download_code(analysis_code):
-            with NamedTemporaryFile(delete=False, suffix=".py") as tmp_file:
-                tmp_file.write(analysis_code.encode())
-                tmp_file.seek(0)
-                st.download_button(
-                    label="Download Code Analysis",
-                    data=tmp_file.name,
-                    file_name="analysis_code.py",
-                    mime="text/plain",
-                )
+        # Data Cleaning Section
+        if st.button("Clean Data"):
+            data = clean_data(data)
 
         # Data Export Section
         if st.button("Export Data"):
             st.subheader("Data Export")
-            export_format = st.radio("Select export format:", ["CSV", "Excel"])
+            export_format = st.radio("Select export format:", ["CSV"])
             export_data(data, export_format)
-
-        # Code Analysis Generators
-        if st.button("Generate Code Analysis"):
-            analysis_code = generate_analysis_code(data)
-
-            st.subheader("Generated Code Analysis")
-            st.code(analysis_code, language="python")
 
 
 # EDA Dashboard
