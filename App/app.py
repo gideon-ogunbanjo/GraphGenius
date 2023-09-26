@@ -364,5 +364,5 @@ def eda_dashboard():
 if __name__ == "__main__":
     main()
 
-link = "Created by: [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app,) and [Nwando Michael](https://nwandomichael.netlify.app)"
+link = "Created by: [Gideon Ogunbanjo](https://gideonogunbanjo.netlify.app) and [Nwando Michael](https://nwandomichael.netlify.app)"
 st.markdown(link, unsafe_allow_html=True)
