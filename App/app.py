@@ -44,7 +44,8 @@ def clean_data(data):
     for col in categorical_columns:
         data[col] = label_encoder.fit_transform(data[col])
 
-    st.write("Data cleaned successfully!")
+    st.write("Null and Duplicate Values Removed.")
+    st.write("Data Cleaned Successfully!")
     return data
 
 # Data Export Function
@@ -65,7 +66,7 @@ def export_data(data, file_format):
 def graphgia():
     st.set_option("deprecation.showPyplotGlobalUse", False)
     st.title("GraphGia - Data Cleaning & Exploration Tool")
-    st.write("This is a data cleaning & exploration tool.")
+    st.write("Upload your Datasets and explore extensively!")
 
     # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
@@ -100,7 +101,7 @@ def graphgia():
 # EDA Dashboard
 def eda_dashboard():
     st.title("EDA Dashboard")
-    st.write("This is an exploratory data analysis dashboard.")
+    st.write("This is an exploratory data analysis dashboard. Upload your datasets and visualize your data interactively!")
 
     uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
 
