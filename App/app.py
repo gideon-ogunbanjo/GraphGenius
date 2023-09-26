@@ -100,7 +100,8 @@ def graphgia():
             description = data.describe()
             st.write(description)
 
-        # Data Cleaning Section
+        # Cleaning Section
+        st.subheader("Data Cleaning")
         if st.button("Clean Data"):
             data = clean_data(data)
 
@@ -115,19 +116,13 @@ def graphgia():
                 data[selected_column] = label_encoder.fit_transform(data[selected_column])
             elif encode_method == "One-Hot Encoding":
                 data = pd.get_dummies(data, columns=[selected_column])
-            st.write(f'Column Encoded Successfully using {encode_method}')
+            st.write(f'Column Encoded Succesfully')
 
         # Data Export Section
-        if st.button("Export Cleaned Data"):
+        if st.button("Export Cleaned & Encoded Data"):
             st.subheader("Data Export")
             export_format = st.radio("Select export format:", ["CSV"])
             export_data(data, export_format)
-
-        # Export Encoded Data
-        if st.button("Export Encoded Data"):
-            st.subheader("Encoded Data Export")
-            export_format_encoded = st.radio("Select export format:", ["CSV"])
-            export_data(data, export_format_encoded, encoded=True)
 
 
 # EDA Dashboard
