@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import io
 import seaborn as sns
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from wordcloud import wordcloud
 import streamlit.components.v1 as components
 from tempfile import NamedTemporaryFile
@@ -66,7 +66,7 @@ def export_data(data, file_format):
 def graphgia():
     st.set_option("deprecation.showPyplotGlobalUse", False)
     st.title("GraphGia - Data Cleaning & Exploration Tool")
-    st.write("Upload your Datasets and explore extensively!")
+    st.write("This is a data cleaning & exploration tool.")
 
     # File Uploader Widget
     uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
@@ -90,6 +90,19 @@ def graphgia():
         # Data Cleaning Section
         if st.button("Clean Data"):
             data = clean_data(data)
+
+        # Encoding Section
+        st.subheader("Encoding Section")
+        selected_column = st.selectbox("Select a column to encode:", data.columns)
+        encode_method = st.radio("Select encoding method:", ["Label Encoding", "One-Hot Encoding"])
+
+        if st.button("Encode Column"):
+            if encode_method == "Label Encoding":
+                label_encoder = LabelEncoder()
+                data[selected_column] = label_encoder.fit_transform(data[selected_column])
+            elif encode_method == "One-Hot Encoding":
+                data = pd.get_dummies(data, columns=[selected_column])
+            st.write(f'Column Encoded Successfully with {encode_method}')
 
         # Data Export Section
         if st.button("Export Data"):
