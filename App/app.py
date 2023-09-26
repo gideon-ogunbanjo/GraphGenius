@@ -48,19 +48,32 @@ def clean_data(data):
     st.write("Data Cleaned Successfully!")
     return data
 
-# Data Export Function
-def export_data(data, file_format):
-    if file_format == "CSV":
-        # Export to CSV
-        csv_file = data.to_csv(index=False)
-        st.download_button(
-            label="Download CSV",
-            data=csv_file,
-            file_name="exported_data.csv",
-            mime="text/csv",
-        )
+#  Data Export Function
+def export_data(data, file_format, encoded=False):
+    if encoded:
+        if file_format == "CSV":
+            # Export to CSV
+            csv_file = data.to_csv(index=False)
+            st.download_button(
+                label="Download Clean Encoded CSV",
+                data=csv_file,
+                file_name="encoded_data.csv",
+                mime="text/csv",
+            )
+        else:
+            st.write("An error occurred")
     else:
-        st.write("An error occured")
+        if file_format == "CSV":
+            # Export to CSV
+            csv_file = data.to_csv(index=False)
+            st.download_button(
+                label="Download CSV",
+                data=csv_file,
+                file_name="exported_data.csv",
+                mime="text/csv",
+            )
+        else:
+            st.write("An error occurred")
 
 # GraphGia
 def graphgia():
@@ -102,13 +115,19 @@ def graphgia():
                 data[selected_column] = label_encoder.fit_transform(data[selected_column])
             elif encode_method == "One-Hot Encoding":
                 data = pd.get_dummies(data, columns=[selected_column])
-            st.write(f'Column Encoded Successfully with {encode_method}')
+            st.write(f'Column Encoded Successfully using {encode_method}')
 
         # Data Export Section
-        if st.button("Export Data"):
+        if st.button("Export Cleaned Data"):
             st.subheader("Data Export")
             export_format = st.radio("Select export format:", ["CSV"])
             export_data(data, export_format)
+
+        # Export Encoded Data
+        if st.button("Export Encoded Data"):
+            st.subheader("Encoded Data Export")
+            export_format_encoded = st.radio("Select export format:", ["CSV"])
+            export_data(data, export_format_encoded, encoded=True)
 
 
 # EDA Dashboard
