@@ -48,7 +48,7 @@ def clean_data(data):
     st.write("Data Cleaned Successfully!")
     return data
 
-#  Data Export Function
+# Data Export Function
 def export_data(data, file_format, encoded=False):
     if encoded:
         if file_format == "CSV":
@@ -74,6 +74,11 @@ def export_data(data, file_format, encoded=False):
             )
         else:
             st.write("An error occurred")
+
+# Function for Ordinal Encoding of Yes/No Columns
+def ordinal_encode_yes_no(data, column_name):
+    data[column_name] = data[column_name].map({"No": 0, "Yes": 1})
+    return data
 
 # GraphGia
 def graphgia():
@@ -108,21 +113,25 @@ def graphgia():
         # Encoding Section
         st.subheader("Encoding Section")
         selected_column = st.selectbox("Select a column to encode:", data.columns)
-        encode_method = st.radio("Select encoding method:", ["Label Encoding", "One-Hot Encoding"])
+        encode_method = st.radio("Select encoding method:", ["Label Encoding", "One-Hot Encoding", "Ordinal Encoding"])
 
         if st.button("Encode Column"):
             if encode_method == "Label Encoding":
                 label_encoder = LabelEncoder()
                 data[selected_column] = label_encoder.fit_transform(data[selected_column])
+                st.write(f'{selected_column} Encoded Successfully using Label Encoding')
             elif encode_method == "One-Hot Encoding":
                 data = pd.get_dummies(data, columns=[selected_column])
-            st.write(f'Column Encoded Succesfully')
+                st.write(f'{selected_column} Encoded Successfully using One-Hot Encoding')
+            elif encode_method == "Ordinal Encoding":
+                data = ordinal_encode_yes_no(data, selected_column)
+                st.write(f'{selected_column} Encoded Successfully using Ordinal Encoding (Yes/No to 0/1)')
 
         # Data Export Section
         if st.button("Export Cleaned & Encoded Data"):
             st.subheader("Data Export")
             export_format = st.radio("Select export format:", ["CSV"])
-            export_data(data, export_format)
+            export_data(data, export_format, encoded=True)
 
 
 # EDA Dashboard
